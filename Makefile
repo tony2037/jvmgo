@@ -9,3 +9,7 @@ jvmgo: src/jvmgo
 search_class: bin/jvmgo
 	$< -Xjre $(jrePath)/jre java.lang.Object
 	$< -Xjre $(jrePath)/jre tests.HelloWorld.HelloWorld
+
+.PHONY: clean
+clean:
+	$(RM) bin/*
