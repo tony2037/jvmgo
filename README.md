@@ -26,3 +26,37 @@ Here, classpath can be seperate into the 3 parts:
 	* ZipEntry: read `ZIP` or `JAR`, which the classes being extracted from
 	* CompositeEntry: traverse all
 	* WildcardEntry: `*`, all classes, but do not dig into child directories
+
+## Parse `.class`
+- [ ] what's gonna do
+```
+Parse `.class`
+reference: https://docs.oracle.com/javase/specs/jvms/se7/html/jvms-4.html
+```
+- [ ] quotation
+```
+A class file consists of a stream of 8-bit bytes. All 16-bit, 32-bit, and 64-bit quantities are constructed by reading in two, four, and eight consecutive 8-bit bytes, respectively. Multibyte data items are always stored in big-endian order, where the high bytes come first. In the Java SE platform, this format is supported by interfaces java.io.DataInput and java.io.DataOutput and classes such as java.io.DataInputStream and java.io.DataOutputStream.
+
+This chapter defines its own set of data types representing class file data: The types **u1, u2, and u4 represent an unsigned one-, two-, or four-byte quantity**, respectively. In the Java SE platform, these types may be read by methods such as readUnsignedByte, readUnsignedShort, and readInt of the interface java.io.DataInput.
+```
+- [ ] The ClassFile Structure
+```
+ClassFile {
+    u4             magic;
+    u2             minor_version;
+    u2             major_version;
+    u2             constant_pool_count;
+    cp_info        constant_pool[constant_pool_count-1];
+    u2             access_flags;
+    u2             this_class;
+    u2             super_class;
+    u2             interfaces_count;
+    u2             interfaces[interfaces_count];
+    u2             fields_count;
+    field_info     fields[fields_count];
+    u2             methods_count;
+    method_info    methods[methods_count];
+    u2             attributes_count;
+    attribute_info attributes[attributes_count];
+}
+```
