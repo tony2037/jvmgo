@@ -88,6 +88,8 @@ The Java Virtual Machine defines various run-time data areas that are used durin
 
 ## Frames
 * Local Variables
+	* A single local variable can hold a value of type boolean, byte, char, short, int, float, reference, or returnAddress.
+	* A pair of local variables can hold a value of type long or double.
 * Operand Stacks
 * Dynamic Linking
 * Normal Method Invocation Completion
