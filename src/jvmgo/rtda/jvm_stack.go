@@ -2,8 +2,8 @@ package rtda
 
 // jvm stack
 type Stack struct {
-	maxSize uint // The maximum size of the stack
-	size    uint // current size
+	maxSize uint
+	size    uint
 	_top    *Frame // stack is implemented as linked list
 }
 
