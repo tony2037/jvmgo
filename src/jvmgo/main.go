@@ -4,7 +4,7 @@ import "fmt"
 import "strings"
 import "jvmgo/classfile"
 import "jvmgo/classpath"
-import "jvmgo/rtda"
+import _ "jvmgo/rtda"
 
 func main() {
 	cmd := parseCmd()
