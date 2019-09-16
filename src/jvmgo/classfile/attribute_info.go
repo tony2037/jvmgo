@@ -1,5 +1,11 @@
 package classfile
 
+var (
+	_attrDeprecated = &DeprecatedAttribute{}
+	_attrSynthetic  = &SyntheticAttribute{}
+)
+
+// see: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7-30
 /*
 attribute_info {
     u2 attribute_name_index;
@@ -29,25 +35,44 @@ func readAttribute(reader *ClassReader, cp ConstantPool) AttributeInfo {
 	return attrInfo
 }
 
-// see: https://docs.oracle.com/javase/specs/jvms/se8/html/jvms-4.html#jvms-4.7-300
 func newAttributeInfo(attrName string, attrLen uint32, cp ConstantPool) AttributeInfo {
 	switch attrName {
+	// case "AnnotationDefault":
+	case "BootstrapMethods":
+		return &BootstrapMethodsAttribute{}
 	case "Code":
 		return &CodeAttribute{cp: cp}
 	case "ConstantValue":
 		return &ConstantValueAttribute{}
 	case "Deprecated":
-		return &DeprecatedAttribute{}
+		return _attrDeprecated
+	case "EnclosingMethod":
+		return &EnclosingMethodAttribute{cp: cp}
 	case "Exceptions":
 		return &ExceptionsAttribute{}
+	case "InnerClasses":
+		return &InnerClassesAttribute{}
 	case "LineNumberTable":
 		return &LineNumberTableAttribute{}
 	case "LocalVariableTable":
 		return &LocalVariableTableAttribute{}
+	case "LocalVariableTypeTable":
+		return &LocalVariableTypeTableAttribute{}
+	// case "MethodParameters":
+	// case "RuntimeInvisibleAnnotations":
+	// case "RuntimeInvisibleParameterAnnotations":
+	// case "RuntimeInvisibleTypeAnnotations":
+	// case "RuntimeVisibleAnnotations":
+	// case "RuntimeVisibleParameterAnnotations":
+	// case "RuntimeVisibleTypeAnnotations":
+	case "Signature":
+		return &SignatureAttribute{cp: cp}
 	case "SourceFile":
 		return &SourceFileAttribute{cp: cp}
+	// case "SourceDebugExtension":
+	// case "StackMapTable":
 	case "Synthetic":
-		return &SyntheticAttribute{}
+		return _attrSynthetic
 	default:
 		return &UnparsedAttribute{attrName, attrLen, nil}
 	}
